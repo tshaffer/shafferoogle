@@ -1,0 +1,15 @@
+{
+  "name": "shafferoogle-server",
+  "version": "0.0.1",
+  "description": "Server for shafferoogle photo site",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ted Shaffer",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
+}

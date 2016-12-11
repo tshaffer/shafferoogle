@@ -1,7 +1,7 @@
 {
-  "name": "react-redux-starter",
+  "name": "shafferoogle",
   "version": "0.0.1",
-  "description": "Starer kit for react / redux projects",
+  "description": "photos with google photos",
   "main": "main.js",
   "author": "Ted Shaffer",
   "license": "MIT",
