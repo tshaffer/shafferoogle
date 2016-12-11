@@ -15,7 +15,7 @@ app.use('/', express.static(path.join(__dirname, '../client/')));
 
 console.log("launch shafferoogle server - listening on port 8080");
 
-app.get('/fetchAlbums', function(req, res) {
+app.get('/fetchAlbums', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
 
   console.log("fetchAlbums invoked");
@@ -37,11 +37,39 @@ app.get('/fetchAlbums', function(req, res) {
     })
     .catch(function (albumsError) {
       console.log(albumsError);
-      res.send("poo");
+      res.send(albumsError);
     });
 });
 
+app.get('/fetchAlbum', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
 
+  console.log("fetchAlbum invoked");
+
+  let albumId = "6157781148956998593";
+
+  var getAlbumUrl = "http://picasaweb.google.com/data/feed/api/user/shaffer.family/albumid/" + albumId;
+
+  axios.get(getAlbumUrl, {
+    params: {albumId}
+  }).then(function (albumResponse) {
+    console.log(albumResponse);
+    console.log("success");
+
+    var xml = albumResponse.data;
+
+    var parseString = require('xml2js').parseString;
+    parseString(xml, function (err, result) {
+      console.dir(result);
+      // res.send(result);
+      res.status(200).send(result);
+      });
+    })
+    .catch(function (albumError) {
+      console.log(albumError);
+      res.send(albumError);
+    });
+});
 // in spite of the documentation, default does not work (at least in this simple case)
 // var getAlbumsUrl = "http://picasaweb.google.com/data/feed/api/user/default";
 // var getAlbumsUrl = "http://picasaweb.google.com/data/feed/api/user/shaffer.family";
