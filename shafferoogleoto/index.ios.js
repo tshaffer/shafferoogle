@@ -26,8 +26,8 @@ export default class shafferoogleoto extends Component {
     let serverURL = "http://localhost:8080/fetchAlbums";
 
     return new Promise((resolve, reject) => {
-      axios.get(serverURL).then((data) => {
-        resolve(data);
+      axios.get(serverURL).then((response) => {
+        resolve(response);
       });
     });
   }
@@ -38,8 +38,8 @@ export default class shafferoogleoto extends Component {
     return new Promise( (resolve, reject) => {
       axios.get(serverURL, {
         params: { albumId }
-      }).then( (data) => {
-        resolve(data);
+      }).then( (response) => {
+        resolve(response);
       });
     })
 
@@ -48,17 +48,36 @@ export default class shafferoogleoto extends Component {
 
     console.log("handleListAlbums invoked");
     let promise = this.fetchAlbums();
-    promise.then( (data) => {
-      console.log("promise.then invoked");
+    promise.then( (response) => {
+      this.parseAlbumFeedResponse(response.data.feed);
     }, (reason) => {
       console.log("promise.then failed", reason);
     });
   }
 
+  parseAlbumFeedResponse(feed) {
+
+    // for (var property in object) { if (object.hasOwnProperty(property)) { // do stuff } }
+
+
+    // feed.entry.forEach ( (album) => {
+    for (let album of feed.entry) {
+      console.log("Album: ", album.title[0]._);
+
+      const title = album.title[0]._;
+      const id = album["gphoto:id"][0];
+      const numPhotos = album["gphoto:numphotos"][0];
+      const timestamp = album["gphoto:timestamp"][0];
+      const mediaGroup = album["media:group"][0];
+      const published = album["published"][0];
+      const dateTimeUpdated = album["updated"][0];
+    }
+  }
+
   handleFetchAlbum() {
     console.log("handleFetchAlbum invoked");
     let promise = this.fetchAlbum();
-    promise.then( (data) => {
+    promise.then( (response) => {
       console.log("promise.then invoked");
     }, (reason) => {
       console.log("promise.then failed", reason);

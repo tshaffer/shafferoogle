@@ -2,3 +2,24 @@ build
 .idea
 node_modules
 
+shafferoogleoto/android/build.gradle
+shafferoogleoto/android/gradle.properties
+shafferoogleoto/android/gradlew
+shafferoogleoto/android/gradlew.bat
+shafferoogleoto/android/settings.gradle
+shafferoogleoto/android/app/BUCK
+shafferoogleoto/android/app/build.gradle
+shafferoogleoto/android/app/proguard-rules.pro
+shafferoogleoto/android/app/src/main/AndroidManifest.xml
+shafferoogleoto/android/app/src/main/java/com/shafferoogleoto/MainActivity.java
+shafferoogleoto/android/app/src/main/java/com/shafferoogleoto/MainApplication.java
+shafferoogleoto/android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+shafferoogleoto/android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+shafferoogleoto/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+shafferoogleoto/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+shafferoogleoto/android/app/src/main/res/values/strings.xml
+shafferoogleoto/android/app/src/main/res/values/styles.xml
+shafferoogleoto/android/gradle/wrapper/gradle-wrapper.jar
+shafferoogleoto/android/gradle/wrapper/gradle-wrapper.properties
+shafferoogleoto/android/keystores/BUCK
+shafferoogleoto/android/keystores/debug.keystore.properties
