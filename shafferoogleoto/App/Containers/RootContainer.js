@@ -49,3 +49,5 @@ class RootContainer extends Component {
   }
 
 }
+
+export default RootContainer;
