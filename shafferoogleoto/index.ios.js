@@ -13,6 +13,8 @@ import {
   View
 } from 'react-native';
 
+import App from './App/Containers/App';
+
 var axios = require('axios');
 
 export default class shafferoogleoto extends Component {
@@ -131,4 +133,5 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('shafferoogleoto', () => shafferoogleoto);
+// AppRegistry.registerComponent('shafferoogleoto', () => shafferoogleoto);
+AppRegistry.registerComponent('shafferoogleoto', () => App)
