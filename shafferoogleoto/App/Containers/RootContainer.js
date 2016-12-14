@@ -42,30 +42,7 @@ class RootContainer extends Component {
     });
   }
 
-  fetchAlbum(albumId) {
-    let serverURL = "http://localhost:8080/fetchAlbum";
-
-    return new Promise( (resolve, reject) => {
-      axios.get(serverURL, {
-        params: { albumId }
-      }).then( (response) => {
-        resolve(response);
-      });
-    })
-
-  }
-  handleListAlbums() {
-
-    console.log("handleListAlbums invoked");
-    let promise = this.fetchAlbums();
-    promise.then( (response) => {
-      this.parseAlbumFeedsResponse(response.data.feed);
-    }, (reason) => {
-      console.log("promise.then failed", reason);
-    });
-  }
-
-  parseAlbumFeedsResponse(feed) {
+  parseAlbumsFeedResponse(feed) {
 
     for (let album of feed.entry) {
       console.log("Album: ", album.title[0]._);
@@ -88,11 +65,63 @@ class RootContainer extends Component {
     }
   }
 
+
+  handleListAlbums() {
+
+    console.log("handleListAlbums invoked");
+    let promise = this.fetchAlbums();
+    promise.then( (response) => {
+      this.parseAlbumsFeedResponse(response.data.feed);
+    }, (reason) => {
+      console.log("promise.then failed", reason);
+    });
+  }
+
+
+  fetchAlbum(albumId) {
+    let serverURL = "http://localhost:8080/fetchAlbum";
+
+    return new Promise( (resolve, reject) => {
+      axios.get(serverURL, {
+        params: { albumId }
+      }).then( (response) => {
+        resolve(response);
+      });
+    })
+  }
+
+  parseAlbumPhoto(photo) {
+    console.log("")
+
+    console.log("photo: ", photo.title[0]._);
+
+    // photoInfo will include:
+    //    height
+    //    medium
+    //    type
+    //    url
+    //    width
+    const photoInfo = photo["media:group"][0]["media:content"][0].$;
+
+    // thumbnails for photo in the array
+    //    photo["media:group"][0]["media:thumbnail"]
+    console.log(photoInfo);
+
+  }
+  parseAlbumFeedResponse(feed) {
+    console.log("Parse album: ", feed.title[0]._);
+    console.log("Last updated: ", feed.updated[0]);
+    console.log("Number of photos in the album is: ", Number(feed["gphoto:numphotos"][0]));
+    feed.entry.forEach( (photo) => {
+      this.parseAlbumPhoto(photo);
+    })
+  }
+
   handleFetchAlbum() {
     console.log("handleFetchAlbum invoked");
     let promise = this.fetchAlbum("6157781148956998593");
     promise.then( (response) => {
-      console.log("promise.then invoked");
+      this.parseAlbumFeedResponse(response.data.feed);
     }, (reason) => {
       console.log("promise.then failed", reason);
     });
