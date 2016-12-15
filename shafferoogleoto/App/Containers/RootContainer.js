@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import {
   AppRegistry,
   Button,
+  Picker,
   StyleSheet,
   Text,
   View
@@ -33,9 +34,15 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  picker: {
+    width: 100,
+  }
 });
 
+const Item = Picker.Item;
+
 class RootContainer extends Component {
+
 
   fetchAlbums() {
     let serverURL = "http://localhost:8080/fetchAlbums";
@@ -134,6 +141,24 @@ class RootContainer extends Component {
     });
   }
 
+  state = {
+    selected1: 'key1',
+    selected2: 'key1',
+    selected3: 'key1',
+    color: 'red',
+    mode: Picker.MODE_DIALOG,
+  };
+
+  // onValueChange = (key: string, value: string) => {
+  onValueChange = (value: string, itemPosition) => {
+    console.log("selected value: ", value);
+    console.log("itemPosition: ", itemPosition);
+    // const newState = {};
+    // newState[key] = value;
+    // this.setState(newState);
+    let newState = { selected1: value };
+    this.setState(newState);
+  };
 
   render() {
     return (
@@ -158,11 +183,22 @@ class RootContainer extends Component {
           title="Fetch Album"
           color="#841584"
         />
+        <Picker
+          style={styles.picker}
+          selectedValue={this.state.selected1}
+          onValueChange={this.onValueChange.bind(this)}>
+          <Item label="choice1" value="key0" />
+          <Item label="choice2" value="key1" />
+          <Item label="choice3" value="key2" />
+          <Item label="choice4" value="key3" />
+        </Picker>
       </View>
     );
   }
 
 }
+
+// {/*onValueChange={this.onValueChange.bind(this, 'selected1')}>*/}
 
 // const mapStateToProps = (state) => ({
 //   app: state.app,
