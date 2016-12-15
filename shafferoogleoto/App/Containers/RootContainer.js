@@ -1,6 +1,9 @@
 // @flow
 
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import {
   AppRegistry,
   Button,
@@ -10,6 +13,8 @@ import {
 } from 'react-native';
 
 var axios = require('axios');
+
+import { addAlbum } from "../store/albums";
 
 const styles = StyleSheet.create({
   container: {
@@ -62,6 +67,8 @@ class RootContainer extends Component {
       console.log(mediaGroup);
       console.log(published);
       console.log(dateTimeUpdated);
+
+      this.props.addAlbum(album);
     }
   }
 
@@ -157,4 +164,15 @@ class RootContainer extends Component {
 
 }
 
-export default RootContainer;
+// const mapStateToProps = (state) => ({
+//   app: state.app,
+//   recentFiles: state.app.recentFiles
+// });
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addAlbum,
+  }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(RootContainer);
