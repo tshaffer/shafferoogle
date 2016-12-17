@@ -7,6 +7,7 @@ if mp <> "1" then
 endif
 
 r=CreateObject("roRectangle", 0,0,1920,1080)
+
 aa=createobjecT("roassociativearray")
 aa.addreplace("nodejs_enabled",true)
 aa.addreplace("brightsign_js_objects_enabled",true)
