@@ -51,7 +51,8 @@ class RootContainer extends Component {
   }
   
   fetchAlbums() {
-    let serverURL = "http://localhost:8080/fetchAlbums";
+    // let serverURL = "http://localhost:8080/fetchAlbums";
+    const serverURL = "http://192.168.0.101:8080/fetchAlbums";
 
     return new Promise((resolve, reject) => {
       axios.get(serverURL).then((response) => {
