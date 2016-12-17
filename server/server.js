@@ -15,6 +15,17 @@ app.use('/', express.static(path.join(__dirname, '../client/')));
 
 console.log("launch shafferoogle server - listening on port 8080");
 
+app.get('/launchSlideShow', (req, res) => {
+
+  res.set('Access-Control-Allow-Origin', '*');
+
+  const albumId = req.query.albumId;
+  console.log("launchSlideShow invoked: ", albumId);
+
+  res.status(200).send(null);
+
+});
+
 app.get('/fetchAlbums', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
 

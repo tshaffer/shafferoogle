@@ -40,6 +40,14 @@ const styles = StyleSheet.create({
 
 class RootContainer extends Component {
 
+  constructor(props) {
+    super(props);
+    this.selectedAlbum = null;
+
+    this.serverUrl = "http://localhost:8080/";
+    // const serverURL = "http://192.168.0.101:8080/";
+
+  }
   componentWillMount() {
 
     let promise = this.fetchAlbums();
@@ -51,11 +59,10 @@ class RootContainer extends Component {
   }
   
   fetchAlbums() {
-    // let serverURL = "http://localhost:8080/fetchAlbums";
-    const serverURL = "http://192.168.0.101:8080/fetchAlbums";
 
     return new Promise((resolve, reject) => {
-      axios.get(serverURL).then((response) => {
+      const url = this.serverUrl + "fetchAlbums";
+      axios.get(url).then((response) => {
         resolve(response);
       });
     });
@@ -79,6 +86,17 @@ class RootContainer extends Component {
     }
   }
 
+  launchSlideShow(albumId) {
+
+    return new Promise((resolve, reject) => {
+      const url = this.serverUrl + "launchSlideShow";
+      axios.get(url, {
+        params: { albumId }})
+      .then((response) => {
+        resolve(response);
+      });
+    });
+  }
 
   // handleListAlbums() {
   //
@@ -142,10 +160,14 @@ class RootContainer extends Component {
 
   handleStartSlideShow() {
     console.log("handleStartSlideShow invoked");
+    if (this.selectedAlbum) {
+      this.launchSlideShow(this.selectedAlbum);
+    }
   }
 
   handleSelectAlbum(album) {
     console.log("handleSelectAlbum invoked for album: ", album);
+    this.selectedAlbum = album;
   }
 
   render() {
