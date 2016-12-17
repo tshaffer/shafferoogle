@@ -54,6 +54,7 @@ class AlbumPicker extends Component {
     console.log("itemPosition: ", itemPosition);
     let newState = { selectedAlbum: value };
     this.setState(newState);
+    this.props.onSelectAlbum(value);
   };
 
   render() {
@@ -79,6 +80,7 @@ class AlbumPicker extends Component {
 
 AlbumPicker.propTypes = {
   albums: React.PropTypes.array.isRequired,
+  onSelectAlbum: React.PropTypes.func.isRequired
 };
 
 export default AlbumPicker;

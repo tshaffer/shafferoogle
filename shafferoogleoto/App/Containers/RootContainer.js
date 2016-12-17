@@ -140,8 +140,11 @@ class RootContainer extends Component {
   // }
 
   handleStartSlideShow() {
-    // console.log("handleSlideShow for album: ", this.state.selectedAlbum);
-    console.log("handleSlideShow invoked");
+    console.log("handleStartSlideShow invoked");
+  }
+
+  handleSelectAlbum(album) {
+    console.log("handleSelectAlbum invoked for album: ", album);
   }
 
   render() {
@@ -155,6 +158,7 @@ class RootContainer extends Component {
         </Text>
         <AlbumPicker
           albums={this.props.albums}
+          onSelectAlbum={this.handleSelectAlbum.bind(this)}
         />
         <Button
           onPress={this.handleStartSlideShow.bind(this)}
