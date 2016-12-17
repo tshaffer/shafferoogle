@@ -17,6 +17,8 @@ var axios = require('axios');
 
 import { addAlbum } from "../store/albums";
 
+import AlbumPicker from '../Component/albumPicker';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -34,23 +36,9 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  picker: {
-    width: 400,
-    height: 400,
-    backgroundColor: 'green',
-    marginTop: 0,
-    marginBottom: 0,
-    padding: 0
-  }
 });
 
-const Item = Picker.Item;
-
 class RootContainer extends Component {
-
-  state = {
-    selectedAlbum: ''
-  };
 
   componentWillMount() {
 
@@ -152,54 +140,11 @@ class RootContainer extends Component {
   // }
 
   handleStartSlideShow() {
-    console.log("handleSlideShow for album: ", this.state.selectedAlbum);
-  }
-
-  onValueChange = (value, itemPosition) => {
-    console.log("selected value: ", value);
-    console.log("itemPosition: ", itemPosition);
-    let newState = { selectedAlbum: value };
-    this.setState(newState);
-  };
-
-  buildAlbumRow(album) {
-
-    return (
-      <Item
-        label={album.title}
-        value={album.id}
-        key={album.id}
-      />
-    );
-  }
-
-  buildAlbumList() {
-
-    var self = this;
-
-    let albumRows = this.props.albums.map(function(album) {
-      const albumRow = self.buildAlbumRow(album);
-      return albumRow;
-    });
-    return albumRows;
+    // console.log("handleSlideShow for album: ", this.state.selectedAlbum);
+    console.log("handleSlideShow invoked");
   }
 
   render() {
-
-    let albumsJSX;
-    if (this.props.albums.length === 0) {
-      albumsJSX = <noscript/>;
-    }
-    else {
-      albumsJSX = this.buildAlbumList();
-    }
-
-    // <Button
-    //   onPress={this.handleListAlbums.bind(this)}
-    //   title="List Albums"
-    //   color="#841584"
-    // />
-
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -208,12 +153,9 @@ class RootContainer extends Component {
         <Text style={styles.instructions}>
           Albums
         </Text>
-        <Picker
-          style={styles.picker}
-          selectedValue={this.state.selectedAlbum}
-          onValueChange={this.onValueChange.bind(this)}>
-          {albumsJSX}
-        </Picker>
+        <AlbumPicker
+          albums={this.props.albums}
+        />
         <Button
           onPress={this.handleStartSlideShow.bind(this)}
           title="Start Slide Show"
@@ -222,10 +164,7 @@ class RootContainer extends Component {
       </View>
     );
   }
-
 }
-
-// {/*onValueChange={this.onValueChange.bind(this, 'selected1')}>*/}
 
 const mapStateToProps = (state) => ({
   albums: state.albums,
