@@ -36,6 +36,11 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: 400,
+    height: 400,
+    backgroundColor: 'green',
+    marginTop: 0,
+    marginBottom: 0,
+    padding: 0
   }
 });
 
@@ -149,8 +154,8 @@ class RootContainer extends Component {
   handleStartSlideShow() {
     console.log("handleSlideShow for album: ", this.state.selectedAlbum);
   }
-  
-  onValueChange = (value: string, itemPosition) => {
+
+  onValueChange = (value, itemPosition) => {
     console.log("selected value: ", value);
     console.log("itemPosition: ", itemPosition);
     let newState = { selectedAlbum: value };
