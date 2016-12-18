@@ -74,15 +74,15 @@ class RootContainer extends Component {
     this.serverUrl = "http://192.168.0.101:8080/";
 
   }
-  componentWillMount() {
-
-    let promise = this.fetchAlbums();
-    promise.then( (response) => {
-      this.parseAlbumsFeedResponse(response.data.feed);
-    }, (reason) => {
-      console.log("promise.then failed", reason);
-    });
-  }
+  // componentWillMount() {
+  //
+  //   let promise = this.fetchAlbums();
+  //   promise.then( (response) => {
+  //     this.parseAlbumsFeedResponse(response.data.feed);
+  //   }, (reason) => {
+  //     console.log("promise.then failed", reason);
+  //   });
+  // }
   
   fetchAlbums() {
 
@@ -118,6 +118,15 @@ class RootContainer extends Component {
   handleConnectToBrightPhoto() {
     console.log("handleConnectToBrightPhoto, connect to: ");
     console.log(this.brightPhotoIPAddress);
+
+    // get albums from device and populate UI
+    let promise = this.fetchAlbums();
+    promise.then( (response) => {
+      this.parseAlbumsFeedResponse(response.data.feed);
+    }, (reason) => {
+      console.log("fetchAlbums promise failed", reason);
+    });
+
   }
 
   handleSelectAlbum(album) {
