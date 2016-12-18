@@ -50,12 +50,41 @@ class RootContainer extends Component {
   }
   componentWillMount() {
 
-    let promise = this.fetchAlbums();
-    promise.then( (response) => {
-      this.parseAlbumsFeedResponse(response.data.feed);
+// ' oauth2 query string parameters'
+/*
+   response_type	token
+   client_id	907348811144-8rv0l3na167smoift9107gil7dsnburn.apps.googleusercontent.com
+   redirect_uri http://localhost:8080
+   scope https://picasaweb.google.com/data/
+   state flibbet
+   login_hint shaffer.family@google.com
+
+example:
+   https://accounts.google.com/o/oauth2/v2/auth?
+   scope=email%20profile&
+   state=%2Fprofile&
+   redirect_uri=https%3A%2F%2Foauth2.example.com%2Foauthcallback&
+   response_type=token&
+   client_id=812741506391.apps.googleusercontent.com
+ */
+
+    let oauth2Url = "https://accounts.google.com/o/oauth2/v2/auth";
+    oauth2Url = oauth2Url + "?response_type=token&client_id=907348811144-8rv0l3na167smoift9107gil7dsnburn.apps.googleusercontent.com";
+    oauth2Url = oauth2Url + "&state=flibbet&redirect_uri=http%3A%2F%2Flocalhost%3A8080&scope=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2F";
+    oauth2Url = oauth2Url + "&login_hint=shaffer.family@google.com";
+    axios.get(oauth2Url).then((response) => {
+      console.log(oauth2success);
+      resolve(response);
     }, (reason) => {
-      console.log("promise.then failed", reason);
+      console.log("oauth2 promise.then failed", reason);
     });
+
+    // let promise = this.fetchAlbums();
+    // promise.then( (response) => {
+    //   this.parseAlbumsFeedResponse(response.data.feed);
+    // }, (reason) => {
+    //   console.log("promise.then failed", reason);
+    // });
   }
   
   fetchAlbums() {
