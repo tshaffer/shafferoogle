@@ -44,8 +44,8 @@ class RootContainer extends Component {
     super(props);
     this.selectedAlbum = null;
 
-    this.serverUrl = "http://localhost:8080/";
-    // const serverURL = "http://192.168.0.101:8080/";
+    // this.serverUrl = "http://localhost:8080/";
+    this.serverUrl = "http://192.168.0.101:8080/";
 
   }
   componentWillMount() {
@@ -84,6 +84,9 @@ class RootContainer extends Component {
 
       this.props.addAlbum(album);
     }
+
+    this.selectedAlbum = feed.entry[0]["gphoto:id"][0];
+
   }
 
   launchSlideShow(albumId) {
