@@ -1,3 +1,16 @@
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+var http = require('http');
+var url = require('url');
+var fs = require('fs');
+var axios = require('axios');
+var xml2js = require('xml2js');
+
+var app = express();
+
+console.log("app.js loaded");
+
 function launchApp()
 {
   console.log("launchApp invoked");
@@ -37,3 +50,6 @@ function launchApp()
   console.log(message);
 
 }
+
+console.log("invoke launchApp");
+launchApp();
